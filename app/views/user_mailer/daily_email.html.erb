@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Daily Attendance Email</h1>
+	<p>
+	<% count = 0 %>
+	<% User.all.each do |u| %>
+		<% Employee.where("user_id = ?", u.id).each do |e| %>
+			<% range = e.oow.nil? ? Date.today - 1 : e.oow %>
+			<% range = e.oow.nil? && e.rtw.nil? ? e.oow : e.oow...e.rtw %>
+			<% if range === Date.today %>
+				<% count += 1 %>
+				<p><%= e.name + " is oow, please contact " + e.buddy %></p>
+			<% end %>
+		<% end %>
+	<% end %>
+	<%= "No one is out of the office today!" unless count > 0 %>
+	</p>
+  </body>
+</html>

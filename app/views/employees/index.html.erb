@@ -1,0 +1,61 @@
+<h1>Listing employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Buddy</th>
+      <th>Oow</th>
+      <th>Rtw</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= employee.buddy %></td>
+        <td><%= employee.oow %></td>
+        <td><%= employee.rtw %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+        <td><%= link_to 'Delete', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>Add New Employee</h2>
+<%= form_tag("/employees/add", method: 'post') do %>
+  <%= label_tag 'employee_text', 'Name' %>
+  <%= text_field_tag(:employee_text) %>
+  </br>
+  <%= label_tag 'buddy_text', 'Buddy' %>
+  <%= text_field_tag(:buddy_text) %>
+  </br>
+  <%= submit_tag('Add', class: 'btn') %>
+<% end %>
+
+<%= link_to 'Logout', :destroy_user_session, method: :delete %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
